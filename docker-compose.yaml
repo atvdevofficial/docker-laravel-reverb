@@ -53,5 +53,12 @@ services:
     ports:
       - "6001:6001"
 
+  redis:
+    image: redis:alpine
+    container_name: laravel_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
 volumes:
   dbdata:

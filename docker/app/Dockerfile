@@ -23,3 +23,7 @@ COPY . .
 
 # Install dependencies
 RUN composer install --no-dev --optimize-autoloader
+
+# Install redis
+RUN docker-php-ext-install pdo pdo_mysql
+RUN pecl install redis && docker-php-ext-enable redis
