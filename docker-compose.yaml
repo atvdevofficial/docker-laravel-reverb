@@ -2,7 +2,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./docker/app/Dockerfile
     container_name: laravel_app
     restart: unless-stopped
     working_dir: /var/www
@@ -19,9 +19,10 @@ services:
       - "8000:80"
     volumes:
       - .:/var/www
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - app
+      - reverb
 
   db:
     image: mysql:8
@@ -36,6 +37,21 @@ services:
       - "3306:3306"
     volumes:
       - dbdata:/var/lib/mysql
+
+  reverb:
+    build:
+      context: .
+      dockerfile: ./docker/reverb/Dockerfile
+    container_name: laravel_reverb
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    command: php artisan reverb:start
+    depends_on:
+      - app
+    ports:
+      - "6001:6001"
 
 volumes:
   dbdata:

@@ -9,9 +9,8 @@ window.Echo = new Echo({
     wsHost: import.meta.env.VITE_REVERB_HOST,
     wsPort: import.meta.env.VITE_REVERB_PORT ?? 80,
     wssPort: import.meta.env.VITE_REVERB_PORT ?? 443,
-    forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
-    enabledTransports: ['ws', 'wss'],
-    authEndpoint: '/fake-broadcasting/auth',
+    forceTLS: false,
+    enabledTransports: ['ws'],
 });
 
 window.Echo.channel('sample-channel')
