@@ -27,3 +27,16 @@ RUN composer install --no-dev --optimize-autoloader
 # Install redis
 RUN docker-php-ext-install pdo pdo_mysql
 RUN pecl install redis && docker-php-ext-enable redis
+
+# Install Supervisor
+RUN apt-get update && apt-get install -y supervisor
+
+# Create Supervisor directory
+RUN mkdir -p /var/log/supervisor
+
+# Copy Supervisor configuration files
+COPY ./docker/app/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+COPY ./docker/app/supervisor/queue-worker.conf /etc/supervisor/conf.d/queue-worker.conf
+
+# Start php-fpm and Supervisor
+CMD ["sh", "-c", "php-fpm -D && /usr/bin/supervisord -c /etc/supervisor/supervisord.conf"]
