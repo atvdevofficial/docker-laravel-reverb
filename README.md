@@ -1,17 +1,22 @@
-<h1>laravel-reverb base sample</h1>
+# Laravel Docker Setup
 
-<p>This is a sample project to demonstrate the use of the laravel-reverb package.</p>
+This is a sample project to demonstrate the use of the laravel-reverb package using docker.
 
-<p>To test follow the instructions below:</p>
+## Containers
 
-<ol>
-    <li>Install all dependencies.</li>
-    <li><p>Build the assets by running <code>yarn build</code></p> </li>
-    <li>
-        <p>On separate terminals run the following commands:</p> 
-        <code>php artisan serve</code> to serve the application.
-        <code>php artisan reverb:start --debug</code> to start the reverb server.
-        <code>php artisan queue:work</code> to start the queue worker.
-    </li>
-</ol>
+-   Laravel, `php-fpm`
+-   Nginx
+-   MySQL
+-   Reverb, `php-cli`
+-   Redis
 
+## Commands / Scripts
+
+-   Laravel queue processor, `docker exec -it laravel_app php artisan queue:work`.
+-   Build assets,
+    -   `yarn build`, for production build,
+    -   or `yarn dev`, for dev build with hot reload capabilities.
+
+## Use in an existing project
+
+All that is needed to be done, is to copy the `docker` folder and the `docker-compose.yaml` into an existing project, based on testing. &#128513;
