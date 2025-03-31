@@ -15,6 +15,8 @@ This is a sample project to demonstrate the use of the laravel-reverb package us
 -   Build assets,
     -   `yarn build`, for production build,
     -   or `yarn dev`, for dev build with hot reload capabilities.
+-   Run migration,
+    -   `docker exec -it laravel_app php artisan migrate:fresh --seed`
 
 ## Use in an existing project
 
